@@ -1,0 +1,38 @@
+.login-input {
+    padding: 1rem;
+    margin-bottom: 3rem;
+    border: none;
+    background-color: #F5F5F5;
+}
+
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-form-container {
+    background-color: #eeeeee;
+    padding: 3rem;
+}
+
+.login-form-container  form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form-container  label {
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content:right;
+}
+
+.login-form-submit-button {
+    background-color: #03A9F4;
+    color: white;
+    border: none;
+    padding: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
