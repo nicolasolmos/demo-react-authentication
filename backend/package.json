@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node ./app.js",
+    "start": "NODE_ENV=PROD node ./app.js",
     "start:debug": "node --inspect-brk ./app.js",
     "test": "NODE_ENV=TEST jest ./tests.spec.js"
   },
@@ -12,6 +12,7 @@
   "author": "Nicolas Olmos",
   "license": "GPL3",
   "dependencies": {
+    "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "jose": "^4.12.0"
   },

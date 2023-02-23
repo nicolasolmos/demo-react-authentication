@@ -1,45 +1,23 @@
+require('dotenv').config();
 const express = require('express');
-const jose = require('jose');
+const { LoginController } = require('./controllers/LoginController');
+const { AuthenticationMiddleware } = require('./middleware/authenticationMiddleware');
+const { SignUpController } = require('./controllers/SignUpController');
+const ErrorMiddleware = require('./middleware/ErrorMiddleware');
 
 const app = express();
 
 app.use(express.json());
 
-app.post('/login', async (request, response) => {
-    try {
-        const { username, password } = request.body;
-        console.log('fdsafsd')
-        const hardCodedUsername = 'NICOLAS';
-        const hardCodedPassword = '123456';
-        const key = new TextEncoder().encode(password);
+app.post('/login', LoginController);
+app.post('/signup', SignUpController);
 
-        const token = await new jose.SignJWT({ username, login: true })
-        .setProtectedHeader({ alg: 'HS256'})
-        .sign(key)
-        
-        console.log(token);
-
-        if(hardCodedPassword === password && hardCodedUsername === username) {
-            response.status(200).end(JSON.stringify({
-                token
-            }));
-        } else {
-            response.status(401).end('BAD AUTHENTICATION');
-        }
-
-    } catch(error) {
-        console.error(error);
-        response.status(500).end();
-    }
-    
-});
-
-app.get('/ping', (request, response) => {
+app.get('/ping', AuthenticationMiddleware, ErrorMiddleware.ErrorMiddleware, (request, response) => {
     response.end('pong');
 });
 
 
-app.listen(4000, () => {
 
+app.listen(4000, () => {
     console.log('BACKEND LISTENING ON PORT 4000');
 });
